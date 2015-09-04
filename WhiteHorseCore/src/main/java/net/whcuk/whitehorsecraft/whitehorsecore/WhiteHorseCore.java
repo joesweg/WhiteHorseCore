@@ -62,8 +62,9 @@ public class WhiteHorseCore extends JavaPlugin implements ActionListener
 		{
 			sender.getServer().broadcastMessage("Server Rebooting in 60 seconds!");
 			time = 0;
-			timer.setInitialDelay(30);
+			timer.setInitialDelay(30000);
 			timer.start();
+			return true;
 		}
 		return false;
 	}
@@ -72,13 +73,13 @@ public class WhiteHorseCore extends JavaPlugin implements ActionListener
 		if (time == 0)
 		{
 			getServer().broadcastMessage("Server Rebooting in 30 Seconds!");
-			timer.setDelay(20);
+			timer.setDelay(20000);
 			time = 30;
 		}
 		else if (time == 30)
 		{
 			getServer().broadcastMessage("Server Rebooting in 10 Seconds");
-			timer.setDelay(10);
+			timer.setDelay(10000);
 			time = 50;
 		}
 		else if (time == 50)
