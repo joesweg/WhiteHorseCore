@@ -1,0 +1,9 @@
+name: WhiteHorseCore
+main: net.whcuk.whitehorsecraft.whitehorsecore.WhiteHorseCore
+version: 1.0
+commands:
+   whc:
+      description: Temporary Command from WhiteHorseCore
+      usage: /<command>
+      permission: WHC.temp
+      permission-message: You don't have <permission>
