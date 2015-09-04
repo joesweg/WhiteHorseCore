@@ -1,5 +1,9 @@
 package net.whcuk.whitehorsecraft.whitehorsecore;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
+
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -9,8 +13,10 @@ import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
-public class WhiteHorseCore extends JavaPlugin 
+public class WhiteHorseCore extends JavaPlugin implements ActionListener 
 {
+	int time = 0;
+	Timer timer = new Timer(100, this);
 	@Override
 	public void onEnable()
 	{
@@ -52,6 +58,32 @@ public class WhiteHorseCore extends JavaPlugin
 			}
 			return true;
 		}
+		else if (cmd.getName().equalsIgnoreCase("reboot"))
+		{
+			sender.getServer().broadcastMessage("Server Rebooting in 60 seconds!");
+			time = 0;
+			timer.setInitialDelay(30);
+			timer.start();
+		}
 		return false;
+	}
+	public void actionPerformed(ActionEvent e) 
+	{
+		if (time == 0)
+		{
+			getServer().broadcastMessage("Server Rebooting in 30 Seconds!");
+			timer.setDelay(20);
+			time = 30;
+		}
+		else if (time == 30)
+		{
+			getServer().broadcastMessage("Server Rebooting in 10 Seconds");
+			timer.setDelay(10);
+			time = 50;
+		}
+		else if (time == 50)
+		{
+			getServer().shutdown();
+		}
 	}
 }
