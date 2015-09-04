@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
+import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -60,7 +61,7 @@ public class WhiteHorseCore extends JavaPlugin implements ActionListener
 		}
 		else if (cmd.getName().equalsIgnoreCase("reboot"))
 		{
-			sender.getServer().broadcastMessage("Server Rebooting in 60 seconds!");
+			sender.getServer().broadcastMessage(Color.RED+"Server Rebooting in 60 seconds!");
 			time = 0;
 			timer.setInitialDelay(30000);
 			timer.start();
@@ -72,15 +73,9 @@ public class WhiteHorseCore extends JavaPlugin implements ActionListener
 	{
 		if (time == 0)
 		{
-			getServer().broadcastMessage("Server Rebooting in 30 Seconds!");
+			getServer().broadcastMessage(Color.RED+"Server Rebooting in 30 Seconds!");
 			timer.setDelay(20000);
 			time = 30;
-		}
-		else if (time == 30)
-		{
-			getServer().broadcastMessage("Server Rebooting in 10 Seconds");
-			timer.setDelay(10000);
-			time = 50;
 		}
 		else if (time == 50)
 		{
