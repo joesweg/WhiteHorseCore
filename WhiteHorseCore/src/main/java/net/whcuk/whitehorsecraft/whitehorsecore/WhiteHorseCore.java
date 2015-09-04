@@ -4,15 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
-import org.bukkit.Color;
-import org.bukkit.GameMode;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.Vector;
 
 public class WhiteHorseCore extends JavaPlugin implements ActionListener 
 {
@@ -30,19 +26,8 @@ public class WhiteHorseCore extends JavaPlugin implements ActionListener
 	{
 		getLogger().info("WhiteHorseCraft Exited Sucessfully!");
 	}
-	
-	@EventHandler
-	public void onFlightAttempt(PlayerToggleFlightEvent event) {
+
 	 
-	    if(!event.isFlying() && event.getPlayer().getGameMode() != GameMode.CREATIVE) {
-	 
-	        event.getPlayer().setVelocity(event.getPlayer().getVelocity().add(new Vector(0,0.25,0)));
-	        event.getPlayer().setFlying(false);
-	        event.setCancelled(true);
-	 
-	    }
-	 
-	}
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
 	{
@@ -61,7 +46,7 @@ public class WhiteHorseCore extends JavaPlugin implements ActionListener
 		}
 		else if (cmd.getName().equalsIgnoreCase("reboot"))
 		{
-			sender.getServer().broadcastMessage(Color.RED+"Server Rebooting in 60 seconds!");
+			sender.getServer().broadcastMessage(ChatColor.RED+"Server Rebooting in 60 seconds!");
 			time = 0;
 			timer.setInitialDelay(30000);
 			timer.start();
@@ -71,15 +56,19 @@ public class WhiteHorseCore extends JavaPlugin implements ActionListener
 	}
 	public void actionPerformed(ActionEvent e) 
 	{
-		if (time == 0)
-		{
-			getServer().broadcastMessage(Color.RED+"Server Rebooting in 30 Seconds!");
-			timer.setDelay(20000);
-			time = 30;
-		}
-		else if (time == 50)
+		if (time == 40)
 		{
 			getServer().shutdown();
+		}
+		else if (time == 30)
+		{
+			
+		}
+		else if (time == 0)
+		{
+			getServer().broadcastMessage(ChatColor.RED+"Server Rebooting in 30 Seconds!");
+			timer.setDelay(20000);
+			time = 30;
 		}
 	}
 }
