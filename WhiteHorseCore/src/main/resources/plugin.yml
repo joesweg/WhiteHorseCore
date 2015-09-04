@@ -7,3 +7,8 @@ commands:
       usage: /<command>
       permission: WHC.temp
       permission-message: You don't have <permission>
+   reboot:
+      description: Reboots the server after a minute warning
+      usage: /<command>
+      permission: whc.reboot
+      permission-message: You don't have <permission>

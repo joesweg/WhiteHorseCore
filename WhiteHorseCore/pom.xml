@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.whcuk.whitehorsecraft</groupId>
   <artifactId>WhiteHorseCore</artifactId>
-  <version>1.1</version>
+  <version>1.2</version>
     <build>
       <plugins>
           <plugin>
