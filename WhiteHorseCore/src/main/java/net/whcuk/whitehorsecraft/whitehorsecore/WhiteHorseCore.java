@@ -4,17 +4,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import com.google.common.collect.ImmutableBiMap.Builder;
 
 public class WhiteHorseCore extends JavaPlugin implements ActionListener {
 	public final String VERSION = "1.5";
 	int time = 0;
+
 	Timer timer = new Timer(100, this);
 
 	@Override
@@ -22,6 +28,38 @@ public class WhiteHorseCore extends JavaPlugin implements ActionListener {
 		getLogger().info("WhiteHorseCraft Booting!");
 
 	}
+	// **BEGIN MENU STUFF**
+
+	public static Inventory WHCMenu = Bukkit.createInventory(null, 9, "WhiteHorseCraft main menu");
+	public static ItemStack menuItem1 = new ItemStack(Material.DIRT, 1);
+	static ItemMeta itemMeta = menuItem1.getItemMeta();
+
+	static {
+		itemMeta.setDisplayName("Menu Item 1");
+		menuItem1.setItemMeta(itemMeta);
+
+		WHCMenu.setItem(0, menuItem1);
+		WHCMenu.setItem(8, new ItemStack(Material.GOLD_BLOCK, 1));
+	}
+
+	@EventHandler
+	public void onInventoryClick(InventoryClickEvent event) {
+		Player player = (Player) event.getWhoClicked(); // The player that
+														// clicked the item
+		ItemStack clicked = event.getCurrentItem(); // The item that was clicked
+		Inventory inventory = event.getInventory(); // The inventory that was
+													// clicked in
+		if (inventory.getName().equals(WHCMenu.getName())) {
+			
+			if (clicked.getType() == Material.DIRT) { // The item that the player clicked it dirt
+				event.setCancelled(true); // Make it so the dirt is back in its original spot
+				player.closeInventory(); // Closes their inventory
+				player.getInventory().addItem(new ItemStack(Material.DIRT, 1)); // Adds dirt
+				}
+		}
+	}
+
+	// **END MENU STUFF
 
 	@Override
 	public void onDisable() {
@@ -45,16 +83,15 @@ public class WhiteHorseCore extends JavaPlugin implements ActionListener {
 					return true;
 				}
 			}
-			} else if (cmd.getName().equalsIgnoreCase("reboot")) {
-				sender.getServer().broadcastMessage(ChatColor.RED + "Server Rebooting in 60 seconds!");
-				time = 0;
-				timer.setInitialDelay(30000);
-				timer.start();
-				return true;
-			}
-		return false;
+		} else if (cmd.getName().equalsIgnoreCase("reboot")) {
+			sender.getServer().broadcastMessage(ChatColor.RED + "Server Rebooting in 60 seconds!");
+			time = 0;
+			timer.setInitialDelay(30000);
+			timer.start();
+			return true;
 		}
-		
+		return false;
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (time == 60) {
