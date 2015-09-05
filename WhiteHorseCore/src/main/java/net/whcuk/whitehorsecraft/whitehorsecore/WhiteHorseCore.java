@@ -120,6 +120,12 @@ public class WhiteHorseCore extends JavaPlugin implements ActionListener
 			timer.setDelay(1000);
 			time = 51;
 		}
+		else if (time == 40)
+		{
+			getServer().broadcastMessage(ChatColor.RED+"Server Rebooting in 10 Seconds!");
+			timer.setDelay(10000);
+			time = 50;
+		}
 		else if (time == 30)
 		{
 			getServer().broadcastMessage(ChatColor.RED+"Server Rebooting in 20 Seconds!");
