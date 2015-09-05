@@ -3,12 +3,12 @@ main: net.whcuk.whitehorsecraft.whitehorsecore.WhiteHorseCore
 version: 1.0
 commands:
    whc:
-      description: Temporary Command from WhiteHorseCore
+      description: Core Command from WhiteHorseCore. Possible arguments include: version.
       usage: /<command>
       permission: WHC.temp
       permission-message: You don't have <permission>
    reboot:
-      description: Reboots the server after a minute warning
+      description: Reboots the server after a minute warning.
       usage: /<command>
       permission: whc.reboot
       permission-message: You don't have <permission>
