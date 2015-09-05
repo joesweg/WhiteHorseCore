@@ -10,6 +10,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.google.common.collect.ImmutableBiMap.Builder;
+
 public class WhiteHorseCore extends JavaPlugin implements ActionListener {
 	public final String VERSION = "1.5";
 	int time = 0;
@@ -37,25 +39,22 @@ public class WhiteHorseCore extends JavaPlugin implements ActionListener {
 					sender.sendMessage("Hello, Console/CommandBlock!");
 				}
 				return true;
+			} else if (args.length == 1) {
+				if (args[0].equalsIgnoreCase("version")) {
+					sender.sendMessage("You are playing WhiteHorseCraft version " + VERSION);
+					return true;
+				}
 			}
-			else if (args[0] == "version")
-			{
-				sender.sendMessage("You are playing WhiteHorseCraft version "+ VERSION);
+			} else if (cmd.getName().equalsIgnoreCase("reboot")) {
+				sender.getServer().broadcastMessage(ChatColor.RED + "Server Rebooting in 60 seconds!");
+				time = 0;
+				timer.setInitialDelay(30000);
+				timer.start();
 				return true;
 			}
-			else 
-			{
-				return false;
-			}
-		} else if (cmd.getName().equalsIgnoreCase("reboot")) {
-			sender.getServer().broadcastMessage(ChatColor.RED + "Server Rebooting in 60 seconds!");
-			time = 0;
-			timer.setInitialDelay(30000);
-			timer.start();
-			return true;
-		}
 		return false;
-	}
+		}
+		
 
 	public void actionPerformed(ActionEvent e) {
 		if (time == 60) {

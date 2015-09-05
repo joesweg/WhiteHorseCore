@@ -1,11 +1,25 @@
 name: WhiteHorseCore
 main: net.whcuk.whitehorsecraft.whitehorsecore.WhiteHorseCore
-version: 1.0
+version: 1.6
+author: SamboyGaming
+load: STARTUP
+permissions:
+    whc.*:
+      description: Gives access to all WhiteHorseCore Commands
+      children:
+        whc.core: true
+        whc.reboot: true
+    whc.core:
+      description: Gives access to /whc
+      default: true
+    whc.reboot:
+      description: Gives access to /reboot
+      default: op
 commands:
    whc:
-      description: Core Command from WhiteHorseCore. Possible arguments include: version.
+      description: Core Command from WhiteHorseCore. Possible arguments include version.
       usage: /<command>
-      permission: WHC.temp
+      permission: WHC.core
       permission-message: You don't have <permission>
    reboot:
       description: Reboots the server after a minute warning.
