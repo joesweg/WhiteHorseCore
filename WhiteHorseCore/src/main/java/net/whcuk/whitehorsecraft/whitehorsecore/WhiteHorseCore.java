@@ -18,7 +18,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class WhiteHorseCore extends JavaPlugin implements ActionListener {
-	public final String VERSION = "1.5";
+	public final String VERSION = "1.7";
+	public final String MCVERSION = "1.8.8";
 	int time = 0;
 
 	Timer timer = new Timer(100, this);
@@ -79,7 +80,7 @@ public class WhiteHorseCore extends JavaPlugin implements ActionListener {
 				return true;
 			} else if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("version")) {
-					sender.sendMessage("You are playing WhiteHorseCraft version " + VERSION);
+					sender.sendMessage("You are playing WhiteHorseCraft version " + VERSION + "for Minecraft " + MCVERSION);
 					return true;
 				}
 			}
