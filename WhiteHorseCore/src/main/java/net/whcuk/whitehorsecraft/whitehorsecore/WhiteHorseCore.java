@@ -18,24 +18,25 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class WhiteHorseCore extends JavaPlugin implements ActionListener {
+	
+	private static WhiteHorseCore instance;
+	
 	public final String VERSION = "1.7";
 	public final String MCVERSION = "1.8.8";
 	int time = 0;
+	
+	private Inventory WHCMenu = Bukkit.createInventory(null, 9, "WhiteHorseCraft main menu");
+	private ItemStack menuItem1 = new ItemStack(Material.DIRT, 1);
 
 	Timer timer = new Timer(100, this);
 
 	@Override
 	public void onEnable() {
 		getLogger().info("WhiteHorseCraft Booting!");
+		instance = this;
+		
+		ItemMeta itemMeta = menuItem1.getItemMeta();
 
-	}
-	// **BEGIN MENU STUFF**
-
-	public static Inventory WHCMenu = Bukkit.createInventory(null, 9, "WhiteHorseCraft main menu");
-	public static ItemStack menuItem1 = new ItemStack(Material.DIRT, 1);
-	static ItemMeta itemMeta = menuItem1.getItemMeta();
-
-	static {
 		itemMeta.setDisplayName("Menu Item 1");
 		menuItem1.setItemMeta(itemMeta);
 
@@ -150,5 +151,13 @@ public class WhiteHorseCore extends JavaPlugin implements ActionListener {
 			timer.setDelay(10000);
 			time = 30;
 		}
+	}
+	
+	public Inventory getWHCMenu() {
+		return WHCMenu;
+	}
+	
+	public static WhiteHorseCore getInstance() {
+		return instance;
 	}
 }
