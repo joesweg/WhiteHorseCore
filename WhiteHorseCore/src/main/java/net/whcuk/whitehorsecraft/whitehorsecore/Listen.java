@@ -8,13 +8,10 @@ import org.bukkit.inventory.Inventory;
 
 public class Listen implements Listener {
 
-	WhiteHorseCore plugin;
-
 	@EventHandler
 	public void onPlayerInteractEvent(PlayerInteractEvent e) {
 		if (e.getPlayer().getItemInHand().equals(Material.NETHER_STAR)) {
-			Inventory inv = WhiteHorseCore.WHCMenu;
-			e.getPlayer().openInventory(inv);
+			e.getPlayer().openInventory(WhiteHorseCore.getInstance().getWHCMenu());
 		}
 	}
 }
